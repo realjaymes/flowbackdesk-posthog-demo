@@ -1,0 +1,20 @@
+[
+  {
+    "event": "cta_clicked",
+    "description": "User clicks a homepage call-to-action button (Start free trial or View pricing)",
+    "file": "app/page.tsx",
+    "properties": ["cta_label", "destination"]
+  },
+  {
+    "event": "plan_selected",
+    "description": "User selects a pricing plan on the pricing page and is redirected to signup",
+    "file": "app/pricing/page.tsx",
+    "properties": ["plan"]
+  },
+  {
+    "event": "signup_completed",
+    "description": "User successfully submits the signup form and creates an account",
+    "file": "app/signup/signup-form.tsx",
+    "properties": ["plan", "email"]
+  }
+]
