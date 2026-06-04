@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Flowbackdesk
 
-## Getting Started
+A mock SaaS app I built to try the [PostHog](https://posthog.com) setup wizard hands-on.
 
-First, run the development server:
+I wanted to see the PostHog onboarding for myself before a conversation with their team. My main site, [Marketing In Action](https://marketinginaction.xyz), is a static HTML site rather than a framework app, so the PostHog wizard had nothing to work with. The wizard (`npx @posthog/wizard`) targets framework projects like Next.js, React, Vue, and Django, and a static site gives it no framework to detect and no package manager to install into. So instead of forcing it onto MIA, I scaffolded a throwaway Next.js app, gave it a fake product identity (Flowbackdesk), and ran the wizard against that to experience the full setup.
 
-```bash
+Flowbackdesk is not a real product. The name is invented and the app exists only to generate analytics events.
+
+---
+
+## What it is
+
+A three-page mock SaaS funnel built with Next.js 16 (App Router, Turbopack) and Tailwind:
+
+- **Landing** (`/`): hero with two call-to-action buttons
+- **Pricing** (`/pricing`): two plan cards that carry the chosen plan into signup
+- **Signup** (`/signup`): email and password form with a success state
+
+The pages follow a real conversion path (landing, then pricing, then signup) so the captured events form a funnel worth analyzing.
+
+---
+
+## What the PostHog wizard set up
+
+Running `npx -y @posthog/wizard@latest` from the project root handled the whole integration:
+
+- Installed `posthog-js` and created `instrumentation-client.ts` to initialize PostHog
+
+- Wrote the project key into `.env.local` (gitignored, so it is not in this repo)
+
+- Added a `/ingest` reverse proxy in `next.config.ts` so events still send when ad blockers are present
+
+- Enabled autocapture for pageviews and clicks with no manual code
+
+- Wired three custom events and identified the user on signup
+
+| Event | Where it fires | Properties |
+|-------|----------------|------------|
+| `cta_clicked` | Landing page CTAs | `cta_label`, `destination` |
+| `plan_selected` | Pricing plan cards | `plan` |
+| `signup_completed` | Signup form submit | `plan`, `email` |
+
+`posthog.identify(email)` runs on signup so the events attach to a person rather than an anonymous visitor.
+
+---
+
+## Run it locally
+
+```sh
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [localhost:3000](http://localhost:3000) and click through the funnel.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To send events to your own PostHog project, add a `.env.local` file with your project key, then restart the dev server:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN=your_project_key
+```
 
-## Learn More
+Events show up in PostHog under **Activity**, and you can build a funnel insight from `cta_clicked` through `plan_selected` to `signup_completed`.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## About
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Built by [James Praise](https://www.jamespraise.xyz), founder of [Marketing In Action](https://marketinginaction.xyz).
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- LinkedIn: [linkedin.com/in/jamespraise](https://www.linkedin.com/in/jamespraise)
+- X: [x.com/realjaymes](https://x.com/realjaymes)
