@@ -10,13 +10,19 @@ Flowbackdesk is not a real product. The name is invented and the app exists only
 
 ## What it is
 
-A three-page mock SaaS funnel built with Next.js 16 (App Router, Turbopack) and Tailwind:
+A three-page mock SaaS funnel built with Next.js 16 (App Router, Turbopack) and Tailwind. The pages follow a real conversion path (landing, then pricing, then signup), so the captured events form a funnel worth analyzing.
 
-- **Landing** (`/`): hero with two call-to-action buttons
-- **Pricing** (`/pricing`): two plan cards that carry the chosen plan into signup
-- **Signup** (`/signup`): email and password form with a success state
+**Landing** (`/`): hero with two call-to-action buttons
 
-The pages follow a real conversion path (landing, then pricing, then signup) so the captured events form a funnel worth analyzing.
+![Flowbackdesk landing page](docs/landing.png)
+
+**Pricing** (`/pricing`): two plan cards that carry the chosen plan into signup
+
+![Flowbackdesk pricing page](docs/pricing.png)
+
+**Signup** (`/signup`): email and password form with a success state
+
+![Flowbackdesk signup page](docs/signup.png)
 
 ---
 
