@@ -44,25 +44,6 @@ Running `npx -y @posthog/wizard@latest` from the project root handled the whole 
 
 ---
 
-## Run it locally
-
-```sh
-npm install
-npm run dev
-```
-
-Open [localhost:3000](http://localhost:3000) and click through the funnel.
-
-To send events to your own PostHog project, add a `.env.local` file with your project key, then restart the dev server:
-
-```
-NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN=your_project_key
-```
-
-Events show up in PostHog under **Activity**, and you can build a funnel insight from `cta_clicked` through `plan_selected` to `signup_completed`.
-
----
-
 ## About
 
 Built by [James Praise](https://www.jamespraise.xyz), founder of [Marketing In Action](https://marketinginaction.xyz).
