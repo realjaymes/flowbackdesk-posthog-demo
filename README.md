@@ -2,7 +2,7 @@
 
 A mock SaaS app I built to try the [PostHog](https://posthog.com) setup wizard hands-on.
 
-I wanted to see the PostHog onboarding for myself before a conversation with their team. My main site, [Marketing In Action](https://marketinginaction.xyz), is a static HTML site rather than a framework app, so the PostHog wizard had nothing to work with. The wizard (`npx @posthog/wizard`) targets framework projects like Next.js, React, Vue, and Django, and a static site gives it no framework to detect and no package manager to install into. So instead of forcing it onto MIA, I scaffolded a throwaway Next.js app, gave it a fake product identity (Flowbackdesk), and ran the wizard against that to experience the full setup.
+I wanted to see the PostHog onboarding for myself, hands-on. My main site, [Marketing In Action](https://marketinginaction.xyz), is a static HTML site rather than a framework app, so the PostHog wizard had nothing to work with. The wizard (`npx @posthog/wizard`) targets framework projects like Next.js, React, Vue, and Django, and a static site gives it no framework to detect and no package manager to install into. So instead of forcing it onto MIA, I scaffolded a throwaway Next.js app, gave it a fake product identity (Flowbackdesk), and ran the wizard against that to experience the full setup.
 
 Flowbackdesk is not a real product. The name is invented and the app exists only to generate analytics events.
 
